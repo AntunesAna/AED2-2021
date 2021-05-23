@@ -1,6 +1,6 @@
 #include<iostream> //biblioteca para utilizar scanf e printf
 #include <time.h> //biblioteca para utilizar as funções de cálculo do tempo
-#include <stdlib.h> //biblioteca para utilizar a função mínimo
+#include <stdlib.h> //biblioteca para utilizar a função de rand
 using namespace std;
 const int RUN = 64;  //o tamanho do run vai ser sempre 64
  
