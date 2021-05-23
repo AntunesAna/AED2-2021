@@ -128,7 +128,7 @@ void arraycrescdecre(int vet[], int vet5[], int tam){
     int aux5 = tam; //variável auxiliar a ser decrementada
     int meio = tam/2; // variável para dividir o vetor em dois
     for (int i=0; i<meio; i++){ //percorre o vetor até o meio
-        vet5[i] = vet[i]; novo vetor recebe elementos do vetor crescente
+        vet5[i] = vet[i]; //novo vetor recebe elementos do vetor crescente
     }
     for (int i=meio; i<tam; i++){ //percorre o vetor do meio ao final
         vet5[i] = vet[aux5-1]; //novo vetor recebe elementos a partir do meio de forma decrescente
