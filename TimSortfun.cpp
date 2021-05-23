@@ -29,9 +29,9 @@ void merge(int arr[], int l, int m, int r)
     // matriz esquerda e direita
     int len1 = m - l + 1, len2 = r - m;
     int left[len1], right[len2];
-    for (int i = 0; i < len1; i++) //cria a matriz da esquerda
+    for (int i = 0; i < len1; i++) //organiza o vetor em submatriz esquerda
         left[i] = arr[l + i];
-    for (int i = 0; i < len2; i++) //cria a matriz da direita
+    for (int i = 0; i < len2; i++) //organiza o vetor em submatriz da direita
         right[i] = arr[m + 1 + i];
  
     int i = 0;
@@ -41,9 +41,9 @@ void merge(int arr[], int l, int m, int r)
     // Depois de comparar, mesclamos essas duas matrizes em uma submatriz maior
     while (i < len1 && j < len2) //percorre a submatriz da esquerda e da direita
     {
-        if (left[i] <= right[j]) //compara os elementos das duas submatrizes, se elementi da matriz esquerda for menor ou igual ao da matriz direita
+        if (left[i] <= right[j]) //compara os elementos das duas submatrizes, se o elemento da matriz esquerda for menor ou igual ao da matriz direita
         {
-            arr[k] = left[i]; //nove vetor recebe elemento da matriz esquerda
+            arr[k] = left[i]; //novo vetor recebe elemento da matriz esquerda
             i++;
         }
         else
