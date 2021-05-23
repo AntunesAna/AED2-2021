@@ -1,0 +1,245 @@
+#include<iostream>
+#include <time.h>
+#include <stdlib.h>
+using namespace std;
+const int RUN = 64;
+ 
+// Esta função classifica a matriz do índice esquerdo 
+// para o índice da direita que é de tamanho máximo RUN
+void insertionSort(int arr[], int left, int right)
+{
+    for (int i = left + 1; i <= right; i++)
+    {
+        int temp = arr[i];
+        int j = i - 1;
+        while (j >= left && arr[j] > temp)
+        {
+            arr[j+1] = arr[j];
+            j--;
+        }
+        arr[j+1] = temp;
+    }
+}
+ 
+// A função de mesclagem, mescla as execuções classificadas
+void merge(int arr[], int l, int m, int r)
+{
+     
+    // A matriz original está dividida em duas partes
+    // matriz esquerda e direita
+    int len1 = m - l + 1, len2 = r - m;
+    int left[len1], right[len2];
+    for (int i = 0; i < len1; i++)
+        left[i] = arr[l + i];
+    for (int i = 0; i < len2; i++)
+        right[i] = arr[m + 1 + i];
+ 
+    int i = 0;
+    int j = 0;
+    int k = l;
+ 
+    // Depois de comparar, mesclamos essas duas matrizes em uma submatriz maior
+    while (i < len1 && j < len2)
+    {
+        if (left[i] <= right[j])
+        {
+            arr[k] = left[i];
+            i++;
+        }
+        else
+        {
+            arr[k] = right[j];
+            j++;
+        }
+        k++;
+    }
+ 
+    // Copia os elementos restantes da esquerda, se houver
+    while (i < len1)
+    {
+        arr[k] = left[i];
+        k++;
+        i++;
+    }
+ 
+    // Copia os elementos restantes da direita, se houver
+    while (j < len2)
+    {
+        arr[k] = right[j];
+        k++;
+        j++;
+    }
+}
+ 
+// Função Timsort para classificar a matriz
+void timSort(int arr[], int n)
+{
+     
+    // Classifica submatrizes individuais de tamanho RUN
+    for (int i = 0; i < n; i+=RUN)
+        insertionSort(arr, i, min((i+RUN-1), (n-1))); //chamada da função insertionSort
+ 
+    // Comece a mesclar a partir do tamanho RUN. Ele irá se fundir para formar o tamanho 64.
+    for (int size = RUN; size < n; size = 2*size){
+         
+        // escolha o ponto inicial da submatriz esquerda. Vamos mesclar arr [left..left + size-1] e arr [left + size, left + 2 * size-1] Após cada mesclagem, aumentamos o tamanho 2 * à esquerda
+        for (int left = 0; left < n; left += 2*size){
+             
+            // encontrar o ponto final da submatriz esquerda, mid + 1 é o ponto inicial da submatriz direita
+            int mid = left + size - 1;
+            int right = min((left + 2*size - 1),(n-1));
+ 
+            // mesclar submatriz arr [esquerda ..... mid] e arr [mid + 1 .... right]
+              if(mid < right)
+                merge(arr, left, mid, right);
+        }
+    }
+
+}
+ 
+// Função para imprimir o vetor
+void printArray(int arr[], int n)
+{
+    for (int i = 0; i < n; i++)
+        printf("%d  ", arr[i]);
+    printf("\n");
+}
+
+
+//Função para criar vetor aleatório
+void arrayAleatorio(int vet[], int tam){
+	for (int i=0; i<tam; i++){
+        	vet[i] = rand() % tam + 1;
+    }
+}
+ 
+//Função para criar vetor decrescente
+void arraydecresc(int vet[], int vet3[], int tam){
+	int aux  = tam;
+    	for (int i=0; i<tam; i++){
+		vet3[i] = vet[aux-1];
+		aux--;
+	 }
+
+}
+ 
+//Função para criar vetor crescente e decrescente
+void arraycrescdecre(int vet[], int vet5[], int tam){
+    int aux5 = tam;
+    int meio = tam/2;
+    for (int i=0; i<meio; i++){
+        vet5[i] = vet[i];
+    }
+    for (int i=meio; i<tam; i++){
+        vet5[i] = vet[aux5-1];
+        aux5--;
+    }
+
+}
+ 
+//Função para criar vetor decrescente e crescente
+void arraydecrecresc(int vet[],int vet4[], int tam){
+    int aux2 = tam, meio = tam/2, aux3 = meio;
+    for (int i=0; i<meio; i++){
+        vet4[i] = vet[aux3-1];
+        aux3--;
+    }
+    for (int i=meio; i<tam; i++){
+        vet4[i] = vet[i];
+        aux2--;
+    }
+
+}
+ 
+
+int main(){
+    //variavel para designar tamanho do vetor inserida pelo usuário
+    int tam;
+    printf ("Digite o tamanho do vetor: ");
+    scanf ("%i", &tam);
+    
+    clock_t t, t2, t3, t4, t5; //variáveis para armazenar tempo
+    int vet[tam], vet2[tam], vet3[tam], vet4[tam], vet5[tam]; //vetores para ordenação
+     
+    
+    
+    //cria vetor aleatório
+    arrayAleatorio(vet, tam); //chamada da função criar vetor aleatório
+    printf("Vetor aleatóio: ");
+    printArray(vet, tam);
+ 
+    // Chamada da função TimSort
+    //Verificando tempo de execução do timSort
+    t = clock(); //armazena tempo
+    timSort(vet, tam);
+    t = clock() - t; //tempo final - tempo inicial
+    
+    //imprime o tempo na tela
+    printf("Tempo de execucao: %lf \n", ((double)t)/((CLOCKS_PER_SEC/1000))); //conversão para double
+    
+    
+    
+    // vetor crescente
+    printf("Vetor crescente: ");
+    printArray(vet, tam);
+    
+    // Chamada da função TimSort
+    //Verificando tempo de execução do TimSort
+    t2 = clock(); //armazena tempo
+    timSort(vet, tam);
+    t2 = clock() - t2; //tempo final - tempo inicial
+    
+    //imprime o tempo na tela
+    printf("Tempo de execucao: %lf \n", ((double)t2)/((CLOCKS_PER_SEC/1000))); //conversão para double
+    
+    
+    
+    //chamada da função para criar vetor decrescente
+    arraydecresc(vet, vet3, tam);
+    printf("Vetor decrescente: ");
+    printArray(vet3, tam);
+    
+    // Chamada da função
+    //Verificando tempo de execução do TimSort
+    t3 = clock(); //armazena tempo
+    timSort(vet3, tam);
+    t3 = clock() - t3; //tempo final - tempo inicial
+    
+    //imprime o tempo na tela
+    printf("Tempo de execucao: %lf \n", ((double)t3)/((CLOCKS_PER_SEC/1000))); //conversão para double
+    
+    
+    
+    
+    //chamada da funlçao para criar Vetor metade decrescente, metade crescente
+    arraydecrecresc(vet, vet4, tam);
+    printf("Vetor metade decrescente, metade crescente: ");
+    printArray(vet4, tam);
+    
+    // Chamada da função TimSort
+    //Verificando tempo de execução do TimSort
+    t4 = clock(); //armazena tempo
+    timSort(vet4, tam);
+    t4 = clock() - t4; //tempo final - tempo inicial
+    
+    //imprime o tempo na tela
+    printf("Tempo de execucao: %lf \n", ((double)t4)/((CLOCKS_PER_SEC/1000))); //conversão para double
+    
+    
+    
+    //chamada da função cria Vetor metade crescente, metade decrescente
+    arraycrescdecre( vet, vet5, tam);
+    printf("Vetor metade crescente, metade decrescente: ");
+    printArray(vet5, tam);
+    
+    // Chamada da função
+    //Verificando tempo de execução do TimSort
+    t5 = clock(); //armazena tempo
+    timSort(vet5, tam);
+    t5 = clock() - t5; //tempo final - tempo inicial
+    
+    //imprime o tempo na tela
+    printf("Tempo de execucao: %lf \n", ((double)t5)/((CLOCKS_PER_SEC/1000))); //conversão para double
+    
+    return 0;
+}
