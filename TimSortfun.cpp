@@ -1,3 +1,9 @@
+//Código elaborado pelos alunos
+//ANA JESSYE ALMEIDA ANTUNES - 1615310046
+//BRUNO DE OLIVEIRA FREIRE - 1615310030
+//KYLCIANE CRISTINY LOPES FREITAS - 1615310052
+
+
 #include<iostream> //biblioteca para utilizar scanf e printf
 #include <time.h> //biblioteca para utilizar as funções de cálculo do tempo
 #include <stdlib.h> //biblioteca para utilizar a função de rand
