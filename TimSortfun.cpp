@@ -100,24 +100,24 @@ void timSort(int arr[], int n)
 // Função para imprimir o vetor
 void printArray(int arr[], int n)
 {
-    for (int i = 0; i < n; i++)
-        printf("%d  ", arr[i]);
+    for (int i = 0; i < n; i++) //percorre o vetor todo
+        printf("%d  ", arr[i]); //mostra cada elemento do vetor
     printf("\n");
 }
 
 
 //Função para criar vetor aleatório
 void arrayAleatorio(int vet[], int tam){
-	for (int i=0; i<tam; i++){
-        	vet[i] = rand() % tam + 1;
+	for (int i=0; i<tam; i++){ //percorre o vetor todo
+        	vet[i] = rand() % tam + 1; //cada posição do vetor recebe um elemento aleatório
     }
 }
  
 //Função para criar vetor decrescente
 void arraydecresc(int vet[], int vet3[], int tam){
-	int aux  = tam;
-    	for (int i=0; i<tam; i++){
-		vet3[i] = vet[aux-1];
+	int aux  = tam; // variável auxiliar a ser decrementada
+    	for (int i=0; i<tam; i++){ //percorre p vetor todo
+		vet3[i] = vet[aux-1]; //vetor decrescente recebe elemento do vetor crescente, de trás para frente
 		aux--;
 	 }
 
@@ -125,13 +125,13 @@ void arraydecresc(int vet[], int vet3[], int tam){
  
 //Função para criar vetor crescente e decrescente
 void arraycrescdecre(int vet[], int vet5[], int tam){
-    int aux5 = tam;
-    int meio = tam/2;
-    for (int i=0; i<meio; i++){
-        vet5[i] = vet[i];
+    int aux5 = tam; //variável auxiliar a ser decrementada
+    int meio = tam/2; // variável para dividir o vetor em dois
+    for (int i=0; i<meio; i++){ //percorre o vetor até o meio
+        vet5[i] = vet[i]; novo vetor recebe elementos do vetor crescente
     }
-    for (int i=meio; i<tam; i++){
-        vet5[i] = vet[aux5-1];
+    for (int i=meio; i<tam; i++){ //percorre o vetor do meio ao final
+        vet5[i] = vet[aux5-1]; //novo vetor recebe elementos a partir do meio de forma decrescente
         aux5--;
     }
 
@@ -139,13 +139,13 @@ void arraycrescdecre(int vet[], int vet5[], int tam){
  
 //Função para criar vetor decrescente e crescente
 void arraydecrecresc(int vet[],int vet4[], int tam){
-    int aux2 = tam, meio = tam/2, aux3 = meio;
-    for (int i=0; i<meio; i++){
-        vet4[i] = vet[aux3-1];
+    int aux2 = tam, meio = tam/2, aux3 = meio; // variável auxiliar a ser decrementada, variável para receber o meio e variável auxiliar a ser decrementada
+    for (int i=0; i<meio; i++){ //percorre o vetor até o meio
+        vet4[i] = vet[aux3-1]; //novo vetor recebe valores do vetor crescente de forma decrescente
         aux3--;
     }
-    for (int i=meio; i<tam; i++){
-        vet4[i] = vet[i];
+    for (int i=meio; i<tam; i++){ // percorre o vetor do meio ao final
+        vet4[i] = vet[i]; //novo vetor recebe vetor crescente do meio até o fim
         aux2--;
     }
 
